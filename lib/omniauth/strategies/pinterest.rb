@@ -8,6 +8,7 @@ module OmniAuth
         :authorize_url => 'https://pinterest.com/oauth/',
         :token_url => 'https://api.pinterest.com/v5/oauth/token'
       }
+      option :token_method, :post
 
       def request_phase
         options[:scope] ||= 'read_public'

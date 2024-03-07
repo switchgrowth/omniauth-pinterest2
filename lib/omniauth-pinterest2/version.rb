@@ -1,5 +1,5 @@
 module OmniAuth
   module Pinterest
-    VERSION = '0.1.4'
+    VERSION = '0.1.1'
   end
 end

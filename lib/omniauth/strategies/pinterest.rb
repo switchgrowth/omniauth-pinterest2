@@ -21,8 +21,8 @@ module OmniAuth
       info { raw_info }
 
       def raw_info
-        # fields = 'first_name,id,last_name,url,account_type,username,bio,image'
-        @raw_info ||= access_token.get("/v5/user_account").parsed['data']
+        access_token.options[:parse] = :json
+        @raw_info ||= access_token.get("/v5/user_account").parsed
       end
 
       def ssl?
@@ -47,9 +47,6 @@ module OmniAuth
 
       def build_access_token
         options.token_params.merge!(headers: { 'Authorization' => basic_auth_header })
-
-        binding.pry
-
         super
       end
 

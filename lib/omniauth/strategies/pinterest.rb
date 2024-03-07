@@ -45,7 +45,7 @@ module OmniAuth
       end
 
       def build_access_token
-        options.token_params.merge!(headers: { 'Authorization' => basic_auth_header, 'Content-Type' => 'application/x-www-form-urlencoded:' })
+        options.token_params.merge!(headers: { 'Authorization' => basic_auth_header, 'Content-Type' => 'application/x-www-form-urlencoded' })
         super
       end
 

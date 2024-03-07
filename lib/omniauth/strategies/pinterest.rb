@@ -6,7 +6,7 @@ module OmniAuth
       option :client_options, {
         :site => 'https://api.pinterest.com/',
         :authorize_url => 'https://pinterest.com/oauth/',
-        :token_url => 'https://api.pinterest.com/v1/oauth/token'
+        :token_url => 'https://api.pinterest.com/v5/oauth/token'
       }
 
       def request_phase
@@ -44,7 +44,17 @@ module OmniAuth
         end
       end
 
-        def callback_url
+      def build_access_token
+        options.token_params.merge!(headers: { 'Authorization' => basic_auth_header, 'Content-Type' => 'application/x-www-form-urlencoded:' })
+        super
+      end
+
+      def basic_auth_header
+        auth = Base64.strict_encode64("#{options[:client_id]}:#{options[:client_secret]}")
+        "Basic #{auth}"
+      end
+
+      def callback_url
         full_host + script_name + callback_path
       end
 
